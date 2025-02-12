@@ -1,2 +1,2 @@
 # Getting_into_Business
-DS 201 Capstone Project 1
+This is the readme file for my DS 201 Getting into Business Capstone project 1. 
