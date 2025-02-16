@@ -1,0 +1,119 @@
+---
+title: "README"
+output: html_document
+date: "2025-02-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Install required packages if not already installed
+if (!require("httr")) install.packages("httr", dependencies = TRUE)
+
+# Set Kaggle credentials (Ensure your Kaggle API key is in ~/.kaggle/kaggle.json)
+Sys.setenv(KAGGLE_CONFIG_DIR = "~/.kaggle")
+
+# Define the URL of the dataset
+url <- "https://www.kaggle.com/api/v1/datasets/download/fratzcan/usa-house-prices"
+
+# Define the destination file path 
+USA_housing_dataset <- "usa-house-prices.zip"
+
+# Extract the dataset
+unzip(USA_housing_dataset, exdir = "usa-house-prices")
+
+# List extracted files 
+list.files("usa-house-prices")
+
+# Import dataset 
+housing_data <- read.csv ("USA Housing Dataset.csv")
+
+getwd()
+
+# When was the data acquired? (What is the time range of the dataset? And when it was collected)
+min(housing_data$date, na.rm = TRUE)
+max(housing_data$date, na.rm = TRUE)
+
+# Where was the data acquired? (Which geographical locations are covered?)
+table(housing_data$city)
+city_table <- as.data.frame(table(housing_data$city))
+colnames(city_table) <- c("City", "Frequency")
+head(city_table)
+
+# What are the attributes of this dataset? (Provide a brief description of each column in the dataset.)
+
+# Create a data frame with attribute names and descriptions
+attributes_table <- data.frame(
+  Attribute = c("date", "price", "bedrooms", "bathrooms", "sqft_living",
+                "sqft_lot", "floors", "waterfront", "view", "condition",  "sqft_above", "sqft_basement", "yr_built", "yr_renovated", "street", "city", "statezip", "country"),
+ 
+  Description = c("Date when the house was sold",
+                  "Sale price of the house",
+                  "Number of bedrooms",
+                  "Number of bathrooms",
+                  "Living area in square feet",
+                  "Lot area in square feet",
+                  "Number of floors",
+                  "Whether the house is waterfront (1: Yes, 0: No)",
+                  "Number of times the house has been viewed",
+                  "Condition of the house (1-5 scale)",
+                  "Square footage of the house above ground",
+                  "Square footage of the basement",
+                  "Year the house was built",
+                  "Year of renovation (0 if never renovated)",
+                  "Street address of house", 
+                  "City of the house location",
+                  "Zip code of the house location",
+                  "Country of the house location")
+)
+
+# Print the table
+print(attributes_table)
+
+View(attributes_table)
+
+# What type of data do these attributes contain? (Categorical, numerical, ordinal, etc)
+
+# Check data type of each attribute
+print(typeof(housing_data$date))
+print(typeof(housing_data$price))
+print(typeof(housing_data$bedrooms))
+print(typeof(housing_data$bathrooms))
+print(typeof(housing_data$sqft_living))
+print(typeof(housing_data$sqft_lot))
+print(typeof(housing_data$floors))
+print(typeof(housing_data$waterfront))
+print(typeof(housing_data$view))
+print(typeof(housing_data$condition))
+print(typeof(housing_data$sqft_above))
+print(typeof(housing_data$sqft_basement))
+print(typeof(housing_data$yr_built))
+print(typeof(housing_data$yr_renovated))
+print(typeof(housing_data$street))
+print(typeof(housing_data$city))
+print(typeof(housing_data$statezip))
+print(typeof(housing_data$country))
+
+# Add a column corresponding to data type to the attributes table
+attributes_table$Type = c("character", "double", "double", "double", "integer", "integer", "double", "integer", "integer", "integer", "integer", "integer", "integer", "integer", "character", "character", "character", "character")
+
+if (!require("kableExtra")) install.packages("kableExtra", dependencies = TRUE)
+if (!require("knitr")) install.packages("knitr", dependencies = TRUE)
+library(knitr)
+
+# Generate a well-formatted table
+styled_table <- kable(attributes_table, format = "html", caption = "📌 USA Housing Data") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"),
+                full_width = F, position = "center") %>%
+  column_spec(1, bold = TRUE, color = "black") %>%
+  column_spec(2, italic = TRUE, color = "blue") %>%
+  column_spec(3, width = "40em") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "black")
+
+# Display the table
+styled_table
+
+```
