@@ -33,6 +33,8 @@ housing_data <- read.csv ("USA Housing Dataset.csv")
 
 getwd()
 
+#PART 1: Understanding the Data
+
 # When was the data acquired? (What is the time range of the dataset? And when it was collected)
 min(housing_data$date, na.rm = TRUE)
 max(housing_data$date, na.rm = TRUE)
@@ -115,5 +117,36 @@ styled_table <- kable(attributes_table, format = "html", caption = "📌 USA Hou
 
 # Display the table
 styled_table
+
+#PART 2: Data Summary & Initial Insights 
+
+#Summary statistics for each attribute
+# Install required package if not installed
+if (!require("psych")) install.packages("psych", dependencies = TRUE)
+
+# Load the library
+library(psych)
+
+describe(housing_data)
+summary(housing_data$price)
+describe(housing_data$price)
+
+# Select only numeric columns
+numeric_data <- housing_data[sapply(housing_data, is.numeric)]
+
+# Create a summary table, ensuring NAs are handled correctly
+summary_table <- data.frame(
+  Attribute = colnames(numeric_data),
+  Min = sapply(numeric_data, function(x) min(x, na.rm = TRUE)),
+  Max = sapply(numeric_data, function(x) max(x, na.rm = TRUE)),
+  Mean = sapply(numeric_data, function(x) mean(x, na.rm = TRUE)),
+  Median = sapply(numeric_data, function(x) median(x, na.rm = TRUE)),
+  SD = sapply(numeric_data, function(x) sd(x, na.rm = TRUE))
+)
+
+# Print the corrected summary table
+print(summary_table)
+
+#If applicable, include visualizations such as histograms, box plots, or scatter plots to showcase trends
 
 ```

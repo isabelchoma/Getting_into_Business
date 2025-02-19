@@ -19,3 +19,19 @@ See attributes_table.
 
 **What type of data do these attributes contain? (Categorical, numerical, ordinal, etc)**
 See attributes_table. 
+
+### Data Summary & Initial Insights 
+
+**Present summary statistics for the attributes.**
+
+**Identify any missing (NA) or empty values.** 
+
+**If applicable, include visualizations.**
+
+#### Expanding Your Investment Knowledge
+
+**Why would this dataset be useful?**
+
+**How could it complement the data you are currently analyzing?**
+
+**Provide a link to the additional dataset.**
