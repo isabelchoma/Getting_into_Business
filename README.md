@@ -13,6 +13,12 @@ The data was collected from 2014-05-02 00:00:00 to 2014-07-10 00:00:00.
 The data was acquired from Zillow. The data covers geographical locations within Washington in the US. 
 The data covers a variety of cities within Washington, which are outlined in our city_table. 
 
+```markdown
+```{r}
+# Display city_table 
+city_table 
+```
+
 **How was the data acquired? (What was the data collection method?Was it from public records, real estate agencies, or another source?)**
 
 The data was acquired from Zillow public records. 
