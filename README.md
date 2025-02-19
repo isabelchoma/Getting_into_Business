@@ -35,3 +35,5 @@ See attributes_table.
 **How could it complement the data you are currently analyzing?**
 
 **Provide a link to the additional dataset.**
+
+[Additional dataset](https://fred.stlouisfed.org/series/WASTHPI)
