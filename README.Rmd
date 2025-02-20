@@ -149,4 +149,13 @@ print(summary_table)
 
 #If applicable, include visualizations such as histograms, box plots, or scatter plots to showcase trends
 
+#Example of how to do a scatterplot
+plot(housing_data$bedrooms, housing_data$bathrooms, pch=19)
+
+#Example of how to do a boxplot
+boxplot(housing_data$bedrooms)
+
+#Example of how to do a histogram 
+hist(housing_data$bedrooms)
+
 ```
