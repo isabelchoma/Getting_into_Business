@@ -18,6 +18,7 @@ The data covers a variety of cities within Washington, which are outlined in our
 # Display city_table 
 city_table 
 ```
+``` 
 
 **How was the data acquired? (What was the data collection method?Was it from public records, real estate agencies, or another source?)**
 
@@ -25,7 +26,12 @@ The data was acquired from Zillow public records.
 
 **What are the attributes of this dataset? (Provide a brief description of each column in the dataset.)**
 
-See attributes_table. 
+```markdown
+```{r}
+# Display attributes_table
+attributes_table
+```
+```  
 
 **What type of data do these attributes contain? (Categorical, numerical, ordinal, etc)**
 
