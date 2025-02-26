@@ -22,11 +22,7 @@ list.files("usa-house-prices")
 ``` r
 # Import dataset 
 housing_data <- read.csv ("USA Housing Dataset.csv", stringsAsFactors = FALSE)
-
-getwd()
 ```
-
-    ## [1] "/Users/isabel_choma/Documents/GitHub/Getting_into_Business"
 
 ## PART 1: Understanding the Data
 
@@ -319,8 +315,35 @@ character
 
 ## PART 2: Data Summary & Initial Insights
 
+``` r
+# Create a summary table, ensuring NAs are handled correctly
+summary_table <- data.frame(
+  Attribute = colnames(numeric_data),
+  Min = sapply(numeric_data, function(x) min(x, na.rm = TRUE)),
+  Max = sapply(numeric_data, function(x) max(x, na.rm = TRUE)),
+  Mean = sapply(numeric_data, function(x) mean(x, na.rm = TRUE)),
+  Median = sapply(numeric_data, function(x) median(x, na.rm = TRUE)),
+  SD = sapply(numeric_data, function(x) sd(x, na.rm = TRUE))
+)
+```
+
 Here is a table that shows the code that corresponds with each
 attribute. These codes are useful for calculating summary statistics.
+
+``` r
+Attribute <- colnames(housing_data)  # Extract column names
+Code <- seq_along(Attribute)  # Create a sequence for the codes
+
+# Create a proper data frame
+df <- data.frame(Code, Attribute, stringsAsFactors = FALSE)
+
+# Generate a well-formatted table
+df %>%
+  kable(caption = "Attribute Codes for Housing Data", longtable = TRUE) %>%
+  kable_styling(latex_options = c("hold_position", "repeat_header")) %>%
+  row_spec(0, bold = TRUE) %>%
+  column_spec(1, bold = TRUE)
+```
 
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -483,7 +506,33 @@ country
 </tr>
 </tbody>
 </table>
-The table below shows summary statistics for the attributes:
+
+``` r
+colnames (housing_data) = Code
+housing_data3 = housing_data[-c(1:18)]
+housing_data2 = housing_data[-c(1, 15:18)]
+bstats = basicStats (housing_data2)[c("Mean", "Stdev", "Median", "Minimum", "Maximum",
+"NAs"), ]
+```
+
+``` r
+summary_long <- summary_stats %>%
+  pivot_longer(cols = everything(), names_to = c("Attribute", "Statistic"), names_sep = "_") %>%
+  pivot_wider(names_from = "Attribute", values_from = "value") %>%
+  mutate(across(where(is.numeric), ~round(.x, 2)))
+```
+
+The table created below shows summary statistics for the attributes:
+
+``` r
+summary_long %>%
+  kable(caption = "Summary Statistics for Housing Data", longtable = TRUE, align = "c") %>%
+  kable_styling(latex_options = c("hold_position", "repeat_header")) %>%
+  row_spec(0, bold = TRUE) %>%  # Bold column names (first row)
+  row_spec(1:nrow(summary_long), font_size = 12) %>%  # Adjust font size for summary rows
+  column_spec(1, bold = TRUE)   # Bold the first column (Statistic names)
+```
+
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 Summary Statistics for Housing Data
@@ -852,6 +901,34 @@ When calculating summary statistics and creating our summary table, we
 separated numeric data and non-numeric data. There are 5 attributes of
 the character data type, so these attributes had empty values. We did
 not include these categorical attributes in our analysis.
+
+### If applicable, include visualizations such as histograms, box plots, or scatter plots to showcase trends.
+
+``` r
+# Apply log1p (log(x + 1)) transformation to avoid log(0) issues
+log_prices <- log1p(housing_data$`2`)
+
+# Check the range of log-transformed prices
+range_log_prices <- range(log_prices, na.rm = TRUE)
+
+plot(housing_data$`3`, log_prices, main="House price vs Number of Bedrooms (Log-transformed)", xlab = "Bedrooms", ylab = "Log of House Price + 1", pch=19, cex = 1.5, col = rgb(0.2, 0.5, 0.8, 0.6), xlim = c(min(housing_data$`3`), max(housing_data$`3`)), ylim = range_log_prices)
+```
+
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+This visualization shows the relationship between number of bedrooms and
+house prices, scaled to log(x+1). We scaled to log in order to make the
+graph more easy to understand visually, and did log(x+1) to eliminate
+the issue of taking the log of zero values. There is not a strong
+relationship presented by this graph, but we can see that the most
+expensive houses are concentrated at around 3-6 bedrooms. Because we
+used transparent blue points, we can see that the areas where the data
+points are most concentrated appear as a darker blue as many points are
+layered on top of each other. There is less data of houses with less
+than 3 or more than 6 bedrooms, as we can see the points still appear
+transparent. The visualization also depicts outliers at the bottom of
+the graph. These outliers have a significantly lower price than the rest
+of the dataset.
 
 ## PART 3: Expanding Your Investment Knowledge
 
