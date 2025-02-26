@@ -285,6 +285,9 @@ summary_long %>%
   row_spec(1:nrow(summary_long), font_size = 12) %>%  # Adjust font size for summary rows
   column_spec(1, bold = TRUE)   # Bold the first column (Statistic names)
 ```
+### Identify any missing (NA) or empty values and discuss potential strategies to handle them.
+
+When calculating summary statistics and creating our summary table, we separated numeric data and non-numeric data. There are 5 attributes of the character data type, so these attributes had empty values. We did not include these categorical attributes in our analysis.  
 
 ## PART 3: Expanding Your Investment Knowledge
 

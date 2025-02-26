@@ -846,6 +846,13 @@ SD
 </tbody>
 </table>
 
+### Identify any missing (NA) or empty values and discuss potential strategies to handle them.
+
+When calculating summary statistics and creating our summary table, we
+separated numeric data and non-numeric data. There are 5 attributes of
+the character data type, so these attributes had empty values. We did
+not include these categorical attributes in our analysis.
+
 ## PART 3: Expanding Your Investment Knowledge
 
 ### Why would this dataset be useful?
