@@ -911,7 +911,11 @@ log_prices <- log1p(housing_data$`2`)
 # Check the range of log-transformed prices
 range_log_prices <- range(log_prices, na.rm = TRUE)
 
-plot(housing_data$`3`, log_prices, main="House price vs Number of Bedrooms (Log-transformed)", xlab = "Bedrooms", ylab = "Log of House Price + 1", pch=19, cex = 1.5, col = rgb(0.2, 0.5, 0.8, 0.6), xlim = c(min(housing_data$`3`), max(housing_data$`3`)), ylim = range_log_prices)
+plot(housing_data$`3`, log_prices, main="House price vs Number of Bedrooms (Log-transformed)", 
+     xlab = "Bedrooms", ylab = "Log of House Price + 1", 
+     pch=19, cex = 1.5, col = rgb(0.2, 0.5, 0.8, 0.6), 
+     xlim = c(min(housing_data$`3`), max(housing_data$`3`)), 
+     ylim = range_log_prices)
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
