@@ -315,6 +315,32 @@ character
 
 ## PART 2: Data Summary & Initial Insights
 
+Here is the mode for each attribute of the data. This is separate from
+the other summary statistics because for the attributes that include
+categorical data, we are only calculating mode, because we could not
+produce the other summary statistics that we calculated below with the
+numerical data, such as mean and standard deviation.
+
+    ##                   Attribute                  Mode
+    ## date                   date   2014-06-23 00:00:00
+    ## price                 price                     0
+    ## bedrooms           bedrooms                     3
+    ## bathrooms         bathrooms                   2.5
+    ## sqft_living     sqft_living                  1720
+    ## sqft_lot           sqft_lot                  5000
+    ## floors               floors                     1
+    ## waterfront       waterfront                     0
+    ## view                   view                     0
+    ## condition         condition                     3
+    ## sqft_above       sqft_above                  1200
+    ## sqft_basement sqft_basement                     0
+    ## yr_built           yr_built                  2006
+    ## yr_renovated   yr_renovated                     0
+    ## street               street 2520 Mulberry Walk NE
+    ## city                   city               Seattle
+    ## statezip           statezip              WA 98103
+    ## country             country                   USA
+
 ``` r
 # Create a summary table, ensuring NAs are handled correctly
 summary_table <- data.frame(
@@ -919,7 +945,7 @@ plot(housing_data$`3`, log_prices, main="House price vs Number of Bedrooms (Log-
      ylim = range_log_prices)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
 
 This visualization shows the relationship between number of bedrooms and
 house prices, scaled to log(x+1). We scaled to log in order to make the
@@ -942,7 +968,7 @@ plot(housing_data$`4`, log_prices, main="House price vs Number of Bathrooms (Log
      ylim = range_log_prices)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 This visualization shows the relationship between number of bathrooms
 and house prices, scaled to log(x+1). We scaled to log in order to make
@@ -961,7 +987,7 @@ hist(housing_data$`10`, main = "Histogram of Housing Condition",
      col = rgb(0.2, 0.5, 0.8))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 This histogram shows us the condition of the houses in the dataset.
 Condition is on a scale from 1-5, with 1 being the worst and 5 being the

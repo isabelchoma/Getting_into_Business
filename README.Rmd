@@ -176,6 +176,27 @@ styled_table
 ```
 
 ## PART 2: Data Summary & Initial Insights 
+
+Here is the mode for each attribute of the data. This is separate from the other summary statistics because for the attributes that include categorical data, we are only calculating mode, because we could not produce the other summary statistics that we calculated below with the numerical data, such as mean and standard deviation. 
+
+```{r, echo=FALSE}
+# Custom function to calculate the mode
+get_mode <- function(x) {
+  uniq_x <- unique(x)  # Get unique values in the vector
+  uniq_x[which.max(tabulate(match(x, uniq_x)))]  # Return the most frequent value
+}
+
+# Apply the mode function to each column of the housing data
+modes_selected <- lapply(housing_data, get_mode)
+
+# Create a data frame to display the modes in a table
+modes_table <- data.frame(Attribute = names(modes_selected), Mode = unlist(modes_selected))
+
+# Print the modes in a well-formatted table
+print(modes_table)
+
+```
+
 ```{r,evaluate=TRUE, include=FALSE}
 #Summary statistics for each attribute
 #describe(housing_data)
